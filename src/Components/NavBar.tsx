@@ -1,4 +1,5 @@
-import { Container, Navbar, Nav, NavDropdown, Form, Row, Dropdown } from "react-bootstrap"
+import { Container, Navbar, Nav, NavDropdown, Form, Row, Dropdown, Col } from "react-bootstrap"
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
     return (
@@ -8,7 +9,23 @@ export const NavBar = () => {
                     left
                 </Row>
                 <Row>
-                    <h1 className="Banner">DRAKEN JEWELRY</h1>
+                    <Row>
+                        <Nav.Link to={'/Home'} as={NavLink}>
+                        <h1 className="Banner" 
+                        style={{
+                        textAlign: 'center',
+                        fontSize: '4.5rem',
+                        marginTop: '1rem'
+                        }}>
+                            DRAKEN JEWELRY
+                        </h1>
+                        </Nav.Link>
+                    </Row>
+                    <Row id='bannerLinks'>
+                        <Col><Nav.Link to={'/Shop'} as={NavLink}>SHOP</Nav.Link></Col>
+                        <>|</>
+                        <Col><Nav.Link to={'/AboutUs'} as={NavLink}>ABOUT US</Nav.Link></Col>
+                    </Row>
                 </Row>
                 <Row>
                     <Dropdown>
@@ -16,10 +33,10 @@ export const NavBar = () => {
                             Account
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Account</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">SignOut</Dropdown.Item>
+                            <Dropdown.Item href="/Account">Account</Dropdown.Item>
+                            <Dropdown.Item href="/SignOut">SignOut</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="#/action-3">Settings</Dropdown.Item>
+                            <Dropdown.Item href="/Settings">Settings</Dropdown.Item>
                         </Dropdown.Menu> 
                     </Dropdown>
                 </Row>

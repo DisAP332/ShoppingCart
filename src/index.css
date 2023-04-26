@@ -11,3 +11,14 @@
 .Banner {
   font-family: Banner;
 }
+
+#bannerLinks > .col {
+  display: flex;
+  justify-content: center;
+}
+
+#bannerLinks > .col > .nav-link {
+  font-weight: bold;
+  font-family: banner;
+  font-size: 1.3rem
+}
