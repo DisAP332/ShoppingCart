@@ -1,7 +1,14 @@
-import { Container, Navbar, Nav, NavDropdown, Form, Row, Dropdown, Col } from "react-bootstrap"
+import { useState } from "react";
+import { Container, Navbar, Nav, NavDropdown, Form, Row, Dropdown, Col, Modal, Button } from "react-bootstrap"
 import { NavLink } from "react-router-dom";
+import { SignInOptions } from './SignInOptions'
 
 export const NavBar = () => {
+    const [showSignInOptions, setShowSignInOptions] = useState(false)
+
+    const handleClose = () => setShowSignInOptions(false)
+    const handleShow = () => setShowSignInOptions(true)
+
     return (
         <Navbar bg="light" expand='lg'>
             <Container>
@@ -33,7 +40,9 @@ export const NavBar = () => {
                             Account
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="/Account">Account</Dropdown.Item>
+                            <Dropdown.Item onClick={handleShow}>
+                                Account
+                            </Dropdown.Item>
                             <Dropdown.Item href="/SignOut">SignOut</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item href="/Settings">Settings</Dropdown.Item>
@@ -41,6 +50,11 @@ export const NavBar = () => {
                     </Dropdown>
                 </Row>
             </Container>
+            <SignInOptions 
+                handleHide = {handleClose}
+                hideOrShow = {showSignInOptions}
+                setHideOrShow = {setShowSignInOptions}
+            />
         </Navbar>
       );
 }

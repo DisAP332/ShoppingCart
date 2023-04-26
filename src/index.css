@@ -22,3 +22,7 @@
   font-family: banner;
   font-size: 1.3rem
 }
+
+#SIOptions > button {
+  font-size: 1.4rem;
+}

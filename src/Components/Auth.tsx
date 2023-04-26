@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword, signInWithPopup, signOut } from 'fireba
 import { useState } from 'react'
 
 export const Auth = () => {
+
+
     return(
         <div>heyo</div>
     )
