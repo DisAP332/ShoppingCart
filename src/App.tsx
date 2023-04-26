@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+import { Container } from 'react-bootstrap'
+
+import { Auth } from './Components/Auth'
+
+import { NavBar } from './Components/NavBar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1>heyo</h1>
-    </div>
+    <Container>
+      <NavBar />
+    </Container>
   )
 }
 
