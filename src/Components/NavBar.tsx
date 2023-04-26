@@ -20,7 +20,7 @@ export const NavBar = () => {
                             <Dropdown.Item href="#/action-2">SignOut</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item href="#/action-3">Settings</Dropdown.Item>
-                        </Dropdown.Menu>
+                        </Dropdown.Menu> 
                     </Dropdown>
                 </Row>
             </Container>
