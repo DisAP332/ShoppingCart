@@ -1,24 +1,25 @@
 import { useState } from "react"
 import { Button, Modal, Form } from "react-bootstrap"
 
-import { createUser, signInWithEmailandPass } from "../Config/Firebase"
+import { createUser, signInWithEmailandPass, addUserInfo } from "../Config/Firebase"
 
 export const EmailLoginModal = (Props) => {
 
     const [newUsersname, setNewUsername] = useState('')
     const [newEmail, setNewEmail] = useState('')
+    const [newPhone, setNewPhone] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [newPasswordVerify, setNewPasswordVerify] = useState('')
 
     const [signInEmail, setSignInEmail] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
 
-    const verifyData = (createUser) => {
-        if (newPassword === newPasswordVerify){
-            console.log('yes')
+    const verifyData = () => {
+        if (newPassword === newPasswordVerify && newPassword.length >= 6){
             createUser(newEmail, newPassword)
+            addUserInfo(newUsersname, newEmail, Number(newPhone))
         } else {
-            console.log('no')
+            window.alert('Looks like you made a error signing up!')
         }
     }
 
@@ -64,6 +65,12 @@ export const EmailLoginModal = (Props) => {
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email"
                 onChange={(e) => setNewEmail(e.target.value)}
+                />
+            </Form.Group>
+            <Form.Group controlId='formNewPhone'>
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control type="number" placeholder="Enter phone number"
+                onChange={(e) => setNewPhone(e.target.value)}
                 />
             </Form.Group>
             <Form.Group controlId='formNewPassword'>

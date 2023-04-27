@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { 
+    getAuth, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword ,
+    signOut,
+} from 'firebase/auth'
+import { addDoc, collection, getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBy3Vp3L1l_HtsztZMdLXBuVlL99yXvA4M",
@@ -19,6 +26,24 @@ export const googleProvider = new GoogleAuthProvider()
 
 export const db = getFirestore(app)
 
+
+
+
+//authentication functionality
+
+const userInfoRef = collection(db, 'users')
+
+export const addUserInfo = async (usersName, userEmail, phoneNumber) => {
+    try{
+        await addDoc(userInfoRef, {
+            name: usersName,
+            email: userEmail,
+            phone: phoneNumber
+        })
+    } catch (err) {
+        console.error(err)
+    }
+}
 
 
 export const signInwithGoogle = async () => {
@@ -40,7 +65,7 @@ export const createUser = (email, password) => {
         });
 }
 
-export const signInWithEmailandPass = (email, password) => {
+export const signInWithEmailandPass = async (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -49,4 +74,12 @@ export const signInWithEmailandPass = (email, password) => {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
+}
+
+export const logOut = async () => {
+    try{
+        await signOut(auth);
+    } catch(err) {
+        console.error(err)
+    }
 }
