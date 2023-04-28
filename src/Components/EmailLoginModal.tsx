@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Modal, Form } from "react-bootstrap"
 
-import { createUser, signInWithEmailandPass, addUserInfo } from "../Config/Firebase"
+import { createUser, signInWithEmailandPass, addUserInfo, auth } from "../Config/Firebase"
 
 export const EmailLoginModal = (Props) => {
 
@@ -14,15 +14,26 @@ export const EmailLoginModal = (Props) => {
     const [signInEmail, setSignInEmail] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
 
-    const verifyData = () => {
+    const verifyData = (Hide) => {
         if (newPassword === newPasswordVerify && newPassword.length >= 6){
             createUser(newEmail, newPassword)
             addUserInfo(newUsersname, newEmail, Number(newPhone))
+            Hide()
         } else {
             window.alert('Looks like you made a error signing up!')
         }
     }
 
+    const loginHandler = (Hide) => {
+        signInWithEmailandPass(signInEmail, signInPassword)
+        if(auth.currentUser){
+            console.log('Congrats on your successful login!')
+            Hide()
+        } else {
+            window.alert('Login Unsuccessful')
+        }
+    }
+    
     return (
     <Modal show={Props.hideOrShow} onHide={Props.handleHide}>
         <Modal.Header closeButton>
@@ -44,7 +55,7 @@ export const EmailLoginModal = (Props) => {
             </Form.Group>
             <Button 
             style={{float: 'right', marginTop: '1rem'}}
-            onClick={() => signInWithEmailandPass(signInEmail, signInPassword)}
+            onClick={() => loginHandler(Props.handleHide)}
             >
             Log In
             </Button>
@@ -87,7 +98,7 @@ export const EmailLoginModal = (Props) => {
             </Form.Group>
             <Button 
             style={{float: 'right', marginTop: '1rem'}}
-            onClick={verifyData}
+            onClick={() => verifyData(Props.handleHide)}
             >
             Submit
             </Button>

@@ -28,7 +28,6 @@ export const db = getFirestore(app)
 
 
 
-
 //authentication functionality
 
 const userInfoRef = collection(db, 'users')
@@ -62,6 +61,7 @@ export const createUser = (email, password) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            
         });
 }
 
