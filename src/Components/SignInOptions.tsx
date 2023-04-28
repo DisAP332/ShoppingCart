@@ -1,6 +1,8 @@
 import {Modal, Button} from 'react-bootstrap';
-import { signInwithGoogle } from '../Config/Firebase'
+import { auth, signInwithGoogle } from '../Config/Firebase'
 import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 import { EmailLoginModal } from './EmailLoginModal';
 
@@ -23,7 +25,7 @@ export const SignInOptions = (Props) => {
           <Modal.Title>Sign in with Google or Email?</Modal.Title>
         </Modal.Header>
         <Modal.Body className='d-flex justify-content-around' id='SIOptions'>
-          <Button onClick={signInwithGoogle}>Google</Button>
+          <Button onClick={signInwithGoogle} href='/'>Google</Button>
           <Button onClick={() => emailOptionHandler(Props.handleHide)}>Email</Button>
         </Modal.Body>
         <Modal.Footer>

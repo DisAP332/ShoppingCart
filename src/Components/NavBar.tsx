@@ -1,13 +1,26 @@
 import { useState } from "react";
 import { Container, Navbar, Nav, NavDropdown, Form, Row, Dropdown, Col, Modal, Button } from "react-bootstrap"
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect, useNavigate } from "react-router-dom";
 import { SignInOptions } from './SignInOptions'
+import { auth } from "../Config/Firebase";
+import { logOut } from "../Config/Firebase";
 
 export const NavBar = () => {
     const [showSignInOptions, setShowSignInOptions] = useState(false)
 
     const handleClose = () => setShowSignInOptions(false)
     const handleShow = () => setShowSignInOptions(true)
+
+    const navigate = useNavigate()
+
+    const loggedInHandler = () => {
+        if (auth.currentUser){
+            navigate('/Account')
+        } else {
+            setShowSignInOptions(true)
+            console.log(showSignInOptions)
+        }
+    }
 
     return (
         <Navbar bg="light" expand='lg'>
@@ -17,7 +30,7 @@ export const NavBar = () => {
                 </Row>
                 <Row>
                     <Row>
-                        <Nav.Link to={'/Home'} as={NavLink}>
+                        <Nav.Link to={'/'} as={NavLink}>
                         <h1 className="Banner" 
                         style={{
                         textAlign: 'center',
@@ -40,10 +53,10 @@ export const NavBar = () => {
                             Account
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={handleShow}>
+                            <Dropdown.Item onClick={loggedInHandler}>
                                 Account
                             </Dropdown.Item>
-                            <Dropdown.Item href="/SignOut">SignOut</Dropdown.Item>
+                            <Dropdown.Item onClick={logOut}>SignOut</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item href="/Settings">Settings</Dropdown.Item>
                         </Dropdown.Menu> 
